@@ -61,14 +61,12 @@ router.delete('/:id', (req, res) => {
 });
 
 function validateMember(member) {
-  const schema = {
-    name: Joi.string()
-      .min(3)
-      .required(),
+  const schema = Joi.object({
+    name: Joi.string().min(3).required(),
     age: Joi.number().required()
-  };
+  });
 
-  return Joi.validate(member, schema);
+  return schema.validate(member); // Modern Joi syntax
 }
 
 module.exports = router;
